@@ -12,8 +12,8 @@ class ApiConfig {
   static const String interestsBaseUrl = '$_baseUrl/interests';
   
   // URLs específicas (las que están hardcodeadas en diferentes lugares)
-  static const String registerCodeUrl = 'https://festymatch-production.up.railway.app/auth/send-register-code';
-
+// Usamos _baseUrl para que se adapte si cambias a localhost o Android
+static String get registerCodeUrl => '$_baseUrl/auth/send-register-code';
   
   // Método para cambiar fácilmente entre entornos
   static String get baseUrl => _baseUrl;

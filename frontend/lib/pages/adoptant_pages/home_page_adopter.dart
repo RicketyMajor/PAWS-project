@@ -4,6 +4,7 @@ import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import '../../components/navbar.dart';
 import '../../components/models/pet_model.dart';
 import '../../services/matchmaking_service.dart';
+import 'package:festymatch_frontend/components/models/match_result_model.dart';
 
 class HomePageAdopter extends StatefulWidget {
   const HomePageAdopter({Key? key}) : super(key: key);
@@ -13,7 +14,8 @@ class HomePageAdopter extends StatefulWidget {
 }
 
 class _HomePageAdopterState extends State<HomePageAdopter> {
-  late Future<List<MatchResult>> _matchesFuture;
+  // CORRECCIÓN 1: Cambiado MatchResult -> MatchResultModel
+  late Future<List<MatchResultModel>> _matchesFuture;
   bool isLoading = true;
   final controller = CardSwiperController();
 
@@ -71,10 +73,10 @@ class _HomePageAdopterState extends State<HomePageAdopter> {
                   child: IconButton(
                     icon: const Icon(Icons.menu, color: Colors.black),
                     onPressed: () {
-                    Navigator.pushNamed(
-                                          context,
-                                          '/preference_form_page',
-                                        );
+                      Navigator.pushNamed(
+                        context,
+                        '/preference_form_page',
+                      );
                     },
                   ),
                 ),
@@ -82,7 +84,8 @@ class _HomePageAdopterState extends State<HomePageAdopter> {
             ),
           ),
           Expanded(
-            child: FutureBuilder<List<MatchResult>>(
+            // CORRECCIÓN 2: Cambiado MatchResult -> MatchResultModel
+            child: FutureBuilder<List<MatchResultModel>>(
               future: _matchesFuture,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
@@ -147,7 +150,8 @@ class _HomePageAdopterState extends State<HomePageAdopter> {
     );
   }
 
-  Widget _buildPetCard(Pet pet, int index, List<MatchResult> matches) {
+  // CORRECCIÓN 3: Cambiado MatchResult -> MatchResultModel
+  Widget _buildPetCard(Pet pet, int index, List<MatchResultModel> matches) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
       child: Column(

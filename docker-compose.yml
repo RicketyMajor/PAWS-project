@@ -1,0 +1,17 @@
+
+version: '3.8'
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: paws_postgres
+    environment:
+      POSTGRES_USER: paws_user
+      POSTGRES_PASSWORD: paws_password
+      POSTGRES_DB: paws_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
